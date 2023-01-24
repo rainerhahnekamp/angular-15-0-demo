@@ -5,10 +5,10 @@ import { map, switchMap } from 'rxjs/operators';
 import { AddressLookuper } from '../services/address-lookuper.service';
 import { noNull } from '../../no-null';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 
 @Component({
   selector: 'eternal-request-info',
