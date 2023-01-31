@@ -26,6 +26,6 @@ import { NgForOf } from '@angular/common';
 export class HomeComponent {
   holidays = [
     { path: 'canada', name: 'Canada' },
-    { path: 'norway', name: 'Norway' },
+    { path: 'lofoten', name: 'Lofoten' },
   ];
 }
