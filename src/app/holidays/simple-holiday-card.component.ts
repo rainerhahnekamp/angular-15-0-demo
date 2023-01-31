@@ -20,7 +20,6 @@ import { NgForOf, NgStyle } from '@angular/common';
   </div>`,
   standalone: true,
   imports: [NgForOf, NgStyle],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleHolidayCardsComponent
   implements HolidayCardsComponent, OnChanges

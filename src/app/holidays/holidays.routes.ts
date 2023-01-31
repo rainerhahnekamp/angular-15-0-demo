@@ -1,4 +1,3 @@
-// SAM4SC:MCAM
 import { Routes } from '@angular/router';
 import { HolidaysComponent } from './holidays.component';
 import { RequestInfoComponent } from './request-info/request-info.component';

@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { HolidayCardsComponent } from './holiday-cards-component';
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { Holiday } from './model/holiday';
 import { CommonModule } from '@angular/common';
+import { HolidaysComponent } from './holidays.component';
+import { BlinkerDirective } from '../shared/blinker.directive';
 
 @Component({
-  template: ` <div class="flex flex-wrap justify-evenly">
-    <mat-card *ngFor="let holiday of holidays" class="mt-4 max-w-xs">
+  selector: 'app-holiday-card',
+  template: ` <div class="flex flex-wrap justify-evenly" appBlinker>
+    <mat-card *ngIf="holiday" class="mt-4 max-w-xs">
       <mat-card-header>
         <mat-card-title>{{ holiday.title }}</mat-card-title>
         <mat-card-subtitle>{{ holiday.teaser }}</mat-card-subtitle>
@@ -17,14 +19,13 @@ import { CommonModule } from '@angular/common';
         {{ holiday.description }}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button>More Info</button>
+        <button mat-raised-button>Request Brochure</button>
       </mat-card-actions>
     </mat-card>
   </div>`,
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatCardModule, MatButtonModule, CommonModule, BlinkerDirective],
 })
-export class DefaultHolidayCardsComponent implements HolidayCardsComponent {
-  @Input() holidays: Holiday[] = [];
+export class HolidayCardComponent {
+  @Input() holiday: Holiday | undefined;
 }

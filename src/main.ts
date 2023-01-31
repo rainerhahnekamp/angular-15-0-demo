@@ -6,11 +6,14 @@ import { MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import de from 'date-fns/locale/de';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
-import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { provideRouter, RouterModule } from '@angular/router';
+import { provideStore, StoreModule } from '@ngrx/store';
+import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { BASE_URL } from './app/shared/base-url.token';
 import { NEW_LAYOUT } from './app/shared/new-layout.token';
 
@@ -20,6 +23,10 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideAnimations(),
+    provideStore(),
+    provideEffects([]),
+    provideRouter(routes),
     { provide: LOCALE_ID, useValue: 'de-AT' },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -28,12 +35,7 @@ bootstrapApplication(AppComponent, {
     { provide: MAT_DATE_LOCALE, useValue: de },
     { provide: BASE_URL, useValue: environment.baseUrl },
     { provide: NEW_LAYOUT, useValue: environment.newLayout },
-    importProvidersFrom(
-      BrowserAnimationsModule,
-      StoreModule.forRoot({}),
-      EffectsModule.forRoot([]),
-      RouterModule.forRoot(routes),
-      HttpClientModule
-    ),
+
+    importProvidersFrom(HttpClientModule),
   ],
 });
