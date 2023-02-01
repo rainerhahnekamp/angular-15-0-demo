@@ -13,9 +13,9 @@ import {
       <img
         class="rounded-lg shadow-lg"
         width="1115"
-        height="672"
+        height="627"
         [priority]="isPriority"
-        [ngSrc]="'/angular-15/' + holiday.path + '.jpg'"
+        [ngSrc]="'/assets/' + holiday.path + '.jpg'"
         ngSrcset="1x, 2x, 3x"
         alt="Canada"
       />
@@ -29,7 +29,7 @@ import {
   `,
   standalone: true,
   imports: [NgOptimizedImage, NgIf],
-  providers: [provideCloudinaryLoader('https://res.cloudinary.com/dhidasbqj')],
+  // providers: [provideCloudinaryLoader('https://res.cloudinary.com/dhidasbqj')],
 })
 export class HolidayPromotionComponent {
   @Input() holiday: { path: string; name: string } | undefined;

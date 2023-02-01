@@ -14,10 +14,11 @@ import { NgForOf } from '@angular/common';
       book a real holiday 😉.
     </p>
     <h3 class="text-lg font-bold mt-4 mb-2">Discover our latest additions</h3>
-    <div class="flex flex-col gap-2">
+    <div class="grid grid-cols-1 gap-2">
       <app-holiday-promotion
-        *ngFor="let holiday of holidays"
+        *ngFor="let holiday of holidays; let isFirst = first"
         [holiday]="holiday"
+        [isPriority]="isFirst"
       ></app-holiday-promotion>
     </div>`,
   standalone: true,
