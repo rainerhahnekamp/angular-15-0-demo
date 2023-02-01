@@ -16,7 +16,6 @@ import {
         height="627"
         [priority]="isPriority"
         [ngSrc]="'/assets/' + holiday.path + '.jpg'"
-        ngSrcset="1x, 2x, 3x"
         alt="Canada"
       />
 
