@@ -27,5 +27,7 @@ export class HomeComponent {
   holidays = [
     { path: 'canada', name: 'Canada' },
     { path: 'lofoten', name: 'Lofoten' },
+    { path: 'cornwall', name: 'Cornwall' },
+    { path: 'tallinn', name: 'Tallinn' },
   ];
 }

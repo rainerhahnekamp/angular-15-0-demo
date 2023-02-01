@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { NgIf, NgOptimizedImage } from '@angular/common';
+import {
+  IMAGE_LOADER,
+  NgIf,
+  NgOptimizedImage,
+  provideCloudinaryLoader,
+} from '@angular/common';
 
 @Component({
   selector: 'app-holiday-promotion',
@@ -7,9 +12,11 @@ import { NgIf, NgOptimizedImage } from '@angular/common';
     <div class="relative" *ngIf="holiday">
       <img
         class="rounded-lg shadow-lg"
-        width="5760"
-        height="2592"
-        [ngSrc]="'/assets/' + holiday.path + '.jpg'"
+        width="1115"
+        height="672"
+        [priority]="isPriority"
+        [ngSrc]="'/angular-15/' + holiday.path + '.jpg'"
+        ngSrcset="1x, 2x, 3x"
         alt="Canada"
       />
 
@@ -22,7 +29,9 @@ import { NgIf, NgOptimizedImage } from '@angular/common';
   `,
   standalone: true,
   imports: [NgOptimizedImage, NgIf],
+  providers: [provideCloudinaryLoader('https://res.cloudinary.com/dhidasbqj')],
 })
 export class HolidayPromotionComponent {
   @Input() holiday: { path: string; name: string } | undefined;
+  @Input() isPriority = false;
 }
