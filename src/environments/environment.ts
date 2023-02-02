@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   newLayout: true,
-  baseUrl: '',
+  baseUrl: 'https://api.eternal-holidays.net',
 };
 
 /*

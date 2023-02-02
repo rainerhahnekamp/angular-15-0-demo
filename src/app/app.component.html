@@ -9,6 +9,14 @@
       <eternal-sidemenu></eternal-sidemenu>
     </mat-drawer>
     <mat-drawer-content>
+      <ng-container
+        *ngIf="progressBarVisibility$ | async as progressBarVisibility"
+      >
+        <mat-progress-bar
+          mode="indeterminate"
+          [ngStyle]="{ visibility: progressBarVisibility }"
+        ></mat-progress-bar>
+      </ng-container>
       <router-outlet></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>

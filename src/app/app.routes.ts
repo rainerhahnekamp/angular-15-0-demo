@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { MembersComponent } from './members.component';
 
 export const routes: Routes = [
   {
@@ -16,7 +15,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./holidays/holidays.routes').then((m) => m.holidayRoutes),
       },
-      { path: 'members', component: MembersComponent },
+      {
+        path: 'customers',
+        loadChildren: () =>
+          import('./customers/customer.routes').then((m) => m.customerRoutes),
+      },
     ],
   },
 ];

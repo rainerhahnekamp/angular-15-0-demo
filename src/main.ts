@@ -4,18 +4,19 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/legacy-form-field';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import de from 'date-fns/locale/de';
-import { HttpClientModule } from '@angular/common/http';
-import {
-  BrowserAnimationsModule,
-  provideAnimations,
-} from '@angular/platform-browser/animations';
+import de from '@angular/common/locales/de';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
-import { provideRouter, RouterModule } from '@angular/router';
-import { provideStore, StoreModule } from '@ngrx/store';
-import { EffectsModule, provideEffects } from '@ngrx/effects';
-import { BASE_URL } from './app/shared/base-url.token';
-import { NEW_LAYOUT } from './app/shared/new-layout.token';
+import { provideRouter } from '@angular/router';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { ConfigService } from './app/config-service';
+import { BaseUrlInterceptor } from './app/base-url.interceptor';
+import { LoadingInterceptor } from './app/shared/loading.interceptor';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(de, 'de-AT');
 
 if (environment.production) {
   enableProdMode();
@@ -32,10 +33,12 @@ bootstrapApplication(AppComponent, {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
     },
-    { provide: MAT_DATE_LOCALE, useValue: de },
-    { provide: BASE_URL, useValue: environment.baseUrl },
-    { provide: NEW_LAYOUT, useValue: environment.newLayout },
-
+    {
+      provide: ConfigService,
+      useValue: new ConfigService(environment.baseUrl),
+    },
     importProvidersFrom(HttpClientModule),
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
 });

@@ -1,0 +1,40 @@
+<h2 class="my-2">Customers</h2>
+<p>
+  <a
+    [routerLink]="['.', 'new']"
+    color="primary"
+    testid="btn-customers-add"
+    mat-raised-button
+    >Add Customer</a
+  >
+</p>
+<div *ngIf="customers$ | async as customers" class="customers">
+  <div class="row header">
+    <p class="edit">&nbsp;</p>
+    <p class="name">Name</p>
+    <p class="country">Country</p>
+    <p class="birthdate">Date of Birth</p>
+  </div>
+  <ng-container *ngIf="customers.length > 0; else noCustomers">
+    <div
+      *ngFor="let customer of customers"
+      class="row"
+      testid="row-customer"
+      [attr.aria-labelledby]="'customer-' + customer.id"
+    >
+      <p class="edit" testid="btn-edit">
+        <a [routerLink]="['.', customer.id]" aria-label="Edit Customer">
+          <mat-icon>edit</mat-icon>
+        </a>
+      </p>
+      <p class="name" [id]="'customer-' + customer.id">
+        {{ customer.firstname }} {{ customer.name }}
+      </p>
+      <p class="country">{{ customer.country }}</p>
+      <p class="birthdate">{{ customer.birthdate | date }}</p>
+    </div>
+  </ng-container>
+  <ng-template #noCustomers>
+    <p>We don't have any customers yet 😥</p>
+  </ng-template>
+</div>
