@@ -11,7 +11,6 @@ export const customerRoutes: Routes = [
     path: '',
     providers: [
       importProvidersFrom(HttpClientModule),
-
       CustomersService,
       {
         provide: HTTP_INTERCEPTORS,

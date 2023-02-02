@@ -1,17 +1,21 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
   selector: '[appBlinker]',
   standalone: true,
 })
 export class BlinkerDirective {
+  @Input('appBlinker') interval: string = '';
   currentColor = '';
   intervalId: number | undefined;
   constructor(private el: ElementRef) {}
 
   @HostListener('mouseenter') onMouseEnter() {
     this.toggle();
-    this.intervalId = window.setInterval(() => this.toggle(), 500);
+    this.intervalId = window.setInterval(
+      () => this.toggle(),
+      Number(this.interval || 500)
+    );
   }
 
   @HostListener('mouseleave') onMouseLeave() {
