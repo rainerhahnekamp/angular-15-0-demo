@@ -12,8 +12,8 @@ import {
     <div class="relative" *ngIf="holiday">
       <img
         class="rounded-lg shadow-lg"
-        width="1115"
-        height="627"
+        width="1103"
+        height="620"
         [priority]="isPriority"
         [ngSrc]="'/assets/' + holiday.path + '.jpg'"
         alt="Canada"
