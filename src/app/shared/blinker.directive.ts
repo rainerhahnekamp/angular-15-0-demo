@@ -1,11 +1,17 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  Optional,
+} from '@angular/core';
 
 @Directive({
   selector: '[appBlinker]',
   standalone: true,
 })
 export class BlinkerDirective {
-  @Input('appBlinker') interval: string = '';
+  @Input('appBlinker') appBlinker: string = '';
   currentColor = '';
   intervalId: number | undefined;
   constructor(private el: ElementRef) {}
@@ -14,7 +20,7 @@ export class BlinkerDirective {
     this.toggle();
     this.intervalId = window.setInterval(
       () => this.toggle(),
-      Number(this.interval || 500)
+      Number(this.appBlinker || 500)
     );
   }
 
@@ -27,7 +33,7 @@ export class BlinkerDirective {
   }
 
   private toggle() {
-    const color = this.currentColor === '' ? 'coral' : '';
+    const color = this.currentColor === '' ? 'red' : '';
     this.currentColor = color;
     this.el.nativeElement.style.color = color;
   }
