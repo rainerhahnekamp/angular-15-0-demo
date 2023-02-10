@@ -2,6 +2,7 @@ import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
+  HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -25,3 +26,12 @@ export class BaseUrlInterceptor implements HttpInterceptor {
     return next.handle(req);
   }
 }
+
+export const baseUrlInterceptor: HttpInterceptorFn = (req, next) => {
+  const configService = inject(ConfigService);
+  if (!req.url.startsWith('https://')) {
+    return next(req.clone({ url: `${configService.baseUrl}${req.url}` }));
+  }
+
+  return next(req);
+};

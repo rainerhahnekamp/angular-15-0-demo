@@ -8,11 +8,7 @@ import { TestidDirective } from '../shared/testid.directive';
 
 @Component({
   selector: 'app-holiday-card',
-  template: ` <div
-    class="flex flex-wrap justify-evenly"
-    appBlinker
-    testid="holiday-card"
-  >
+  template: ` <div class="flex flex-wrap justify-evenly">
     <mat-card *ngIf="holiday" class="mt-4 max-w-xs">
       <mat-card-header>
         <mat-card-title>{{ holiday.title }}</mat-card-title>
@@ -28,12 +24,10 @@ import { TestidDirective } from '../shared/testid.directive';
     </mat-card>
   </div>`,
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-    BlinkerDirective,
-    TestidDirective,
-    NgIf,
+  imports: [MatCardModule, MatButtonModule, NgIf],
+  hostDirectives: [
+    { directive: BlinkerDirective, inputs: ['appBlinker:blinkerInterval'] },
+    { directive: TestidDirective, inputs: ['testid'] },
   ],
 })
 export class HolidayCardComponent {

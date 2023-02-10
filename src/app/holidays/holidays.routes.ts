@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HolidaysComponent } from './holidays.component';
 import { RequestInfoComponent } from './request-info/request-info.component';
 
-export const holidayRoutes: Routes = [
+const holidayRoutes: Routes = [
   {
     path: '',
     children: [
@@ -19,3 +19,5 @@ export const holidayRoutes: Routes = [
     ],
   },
 ];
+
+export default holidayRoutes;

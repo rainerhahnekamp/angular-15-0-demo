@@ -4,14 +4,23 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import de from '@angular/common/locales/de';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app/app.routes';
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { ConfigService } from './app/config-service';
-import { BaseUrlInterceptor } from './app/base-url.interceptor';
+import {
+  baseUrlInterceptor,
+  BaseUrlInterceptor,
+} from './app/base-url.interceptor';
 import { LoadingInterceptor } from './app/shared/loading.interceptor';
 import { registerLocaleData } from '@angular/common';
 
@@ -36,8 +45,10 @@ bootstrapApplication(AppComponent, {
       provide: ConfigService,
       useValue: new ConfigService(environment.baseUrl),
     },
-    importProvidersFrom(HttpClientModule),
-    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+    provideHttpClient(
+      withInterceptors([baseUrlInterceptor]),
+      withInterceptorsFromDi()
+    ),
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
 });

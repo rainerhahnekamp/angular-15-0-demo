@@ -12,6 +12,8 @@ import { HolidayCardComponent } from './holiday-card.component';
       <app-holiday-card
         *ngFor="let holiday of holidays"
         [holiday]="holiday"
+        blinkerInterval="100"
+        testid="holiday-card"
       ></app-holiday-card>
     </div>`,
   selector: 'eternal-holidays',

@@ -10,14 +10,10 @@ import { ConfigService } from '../config-service';
 
 @Injectable()
 export class CustomersInterceptor implements HttpInterceptor {
-  #configService = inject(ConfigService);
-
   intercept(
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    return next.handle(
-      req.clone({ url: `${this.#configService.baseUrl}/customers${req.url}` })
-    );
+    return next.handle(req.clone({ url: `/customers${req.url}` }));
   }
 }

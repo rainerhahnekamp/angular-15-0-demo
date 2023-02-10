@@ -12,8 +12,7 @@ export const routes: Routes = [
       },
       {
         path: 'holidays',
-        loadChildren: () =>
-          import('./holidays/holidays.routes').then((m) => m.holidayRoutes),
+        loadChildren: () => import('./holidays/holidays.routes'),
       },
       {
         path: 'customers',

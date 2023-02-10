@@ -15,12 +15,13 @@ import {
         width="1103"
         height="620"
         [priority]="isPriority"
-        [ngSrc]="'/assets/' + holiday.path + '.jpg'"
+        [ngSrc]="'/angular-15/' + holiday.path + '.jpg'"
         alt="Canada"
+        sizes="(max-width: 1023px) calc(100vw - 192px), (max-width: 1279px) calc((100vw - 192px) / 2), calc(100vw - 100vw + 548px)"
       />
 
       <h3
-        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[8vw] font-semibold text-white uppercase"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[8vw] lg:text-[90px] font-semibold text-white uppercase"
       >
         {{ holiday.name }}
       </h3>
@@ -28,7 +29,7 @@ import {
   `,
   standalone: true,
   imports: [NgOptimizedImage, NgIf],
-  // providers: [provideCloudinaryLoader('https://res.cloudinary.com/dhidasbqj')],
+  providers: [provideCloudinaryLoader('https://res.cloudinary.com/dhidasbqj')],
 })
 export class HolidayPromotionComponent {
   @Input() holiday: { path: string; name: string } | undefined;
