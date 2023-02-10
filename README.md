@@ -1,8 +1,9 @@
 This project demonstrates features introduced in Angular 15.0:
 
-- Angular Material Fix
-- Deprecation of providedIn NgModule
+- NgOptimizedImage
 - `provideHttpClient`
 - Directive Composition API
-- functional injectors
-- NgOptimizedImage
+
+You can watch the accompanying video
+
+<a href="https://youtu.be/4Mkm0Z9RGR0"><img src="youtube.jpg"></a>
